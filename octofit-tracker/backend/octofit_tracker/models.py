@@ -1,15 +1,18 @@
+from bson import ObjectId
 from djongo import models
 
 class User(models.Model):
+    _id = models.CharField(max_length=24, primary_key=True, default=lambda: str(ObjectId()))
+    username = models.CharField(max_length=100, unique=True)
     email = models.EmailField(unique=True)
-    name = models.CharField(max_length=100)
-    age = models.IntegerField()
+    password = models.CharField(max_length=128)
     class Meta:
         db_table = 'user'
     def __str__(self):
-        return f"{self.name} ({self.email})"
+        return f"{self.username} ({self.email})"
 
 class Team(models.Model):
+    _id = models.CharField(max_length=24, primary_key=True, default=lambda: str(ObjectId()))
     name = models.CharField(max_length=100)
     members = models.JSONField()
     class Meta:
@@ -18,6 +21,7 @@ class Team(models.Model):
         return self.name
 
 class Activity(models.Model):
+    _id = models.CharField(max_length=24, primary_key=True, default=lambda: str(ObjectId()))
     user = models.CharField(max_length=100)
     activity_type = models.CharField(max_length=50)
     duration = models.IntegerField()
@@ -27,6 +31,7 @@ class Activity(models.Model):
         return f"{self.activity_type} by User {self.user}"
 
 class Leaderboard(models.Model):
+    _id = models.CharField(max_length=24, primary_key=True, default=lambda: str(ObjectId()))
     user = models.CharField(max_length=100)
     score = models.IntegerField()
     class Meta:
@@ -35,6 +40,7 @@ class Leaderboard(models.Model):
         return f"User {self.user} - Score: {self.score}"
 
 class Workout(models.Model):
+    _id = models.CharField(max_length=24, primary_key=True, default=lambda: str(ObjectId()))
     name = models.CharField(max_length=100)
     description = models.TextField()
     class Meta:
