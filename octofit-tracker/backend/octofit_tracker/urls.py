@@ -14,14 +14,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-from django.urls import path
-from . import views
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import UserViewSet, TeamViewSet, ActivityViewSet, LeaderboardViewSet, WorkoutViewSet
+
+router = DefaultRouter()
+router.register(r'users', UserViewSet, basename='user')
+router.register(r'teams', TeamViewSet, basename='team')
+router.register(r'activities', ActivityViewSet, basename='activity')
+router.register(r'leaderboard', LeaderboardViewSet, basename='leaderboard')
+router.register(r'workouts', WorkoutViewSet, basename='workout')
 
 urlpatterns = [
-    path('', views.api_root, name='api_root'),
-    path('users/', views.UserView.as_view(), name='users'),
-    path('teams/', views.TeamView.as_view(), name='teams'),
-    path('activity/', views.ActivityView.as_view(), name='activity'),
-    path('leaderboard/', views.LeaderboardView.as_view(), name='leaderboard'),
-    path('workouts/', views.WorkoutView.as_view(), name='workouts'),
+    path('', include(router.urls)),
 ]

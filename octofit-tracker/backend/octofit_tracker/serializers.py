@@ -1,9 +1,10 @@
 from rest_framework import serializers
+from .models import User
 
-class UserSerializer(serializers.Serializer):
-    email = serializers.EmailField()
-    name = serializers.CharField(max_length=100)
-    age = serializers.IntegerField()
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['_id', 'username', 'email', 'password']
 
 class TeamSerializer(serializers.Serializer):
     name = serializers.CharField(max_length=100)

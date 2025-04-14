@@ -5,7 +5,7 @@ class User(models.Model):
     _id = models.CharField(max_length=24, primary_key=True, default=lambda: str(ObjectId()))
     username = models.CharField(max_length=100, unique=True)
     email = models.EmailField(unique=True)
-    password = models.CharField(max_length=128)
+    password = models.CharField(max_length=100)
     class Meta:
         db_table = 'user'
     def __str__(self):
