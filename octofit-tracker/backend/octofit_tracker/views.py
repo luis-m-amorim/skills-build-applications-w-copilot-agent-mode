@@ -34,7 +34,7 @@ class WorkoutSerializer(ModelSerializer):
 
 @api_view(['GET'])
 def api_root(request, format=None):
-    base_url = request.build_absolute_uri('/api/')  # Ensure the base URL includes the API suffix (absolute_uri includes dynamically codespace_name=reimagined-space-invention-69gpvxv4rgxr357x6)
+    base_url = "https://reimagined-space-invention-69gpvxv4rgxr357x6-8000.app.github.dev/api/"  # Explicitly include the codespace name
     return Response({
         'users': f"{base_url}users/",
         'teams': f"{base_url}teams/",
