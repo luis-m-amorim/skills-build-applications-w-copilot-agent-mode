@@ -5,6 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from django.contrib.auth.hashers import make_password
+import os
 
 class UserSerializer(ModelSerializer):
     class Meta:
@@ -33,14 +34,13 @@ class WorkoutSerializer(ModelSerializer):
 
 @api_view(['GET'])
 def api_root(request, format=None):
-    base_url = request.build_absolute_uri('/')
-    codespace_suffix = 'api/'  # Add the codespace Django REST API endpoint suffix
+    base_url = request.build_absolute_uri('/api/')  # Ensure the base URL includes the API suffix (absolute_uri includes dynamically codespace_name=reimagined-space-invention-69gpvxv4rgxr357x6)
     return Response({
-        'users': f"{base_url}{codespace_suffix}users/",
-        'teams': f"{base_url}{codespace_suffix}teams/",
-        'activities': f"{base_url}{codespace_suffix}activity/",
-        'leaderboard': f"{base_url}{codespace_suffix}leaderboard/",
-        'workouts': f"{base_url}{codespace_suffix}workouts/",
+        'users': f"{base_url}users/",
+        'teams': f"{base_url}teams/",
+        'activities': f"{base_url}activity/",
+        'leaderboard': f"{base_url}leaderboard/",
+        'workouts': f"{base_url}workouts/",
     })
 
 class UserViewSet(ModelViewSet):
