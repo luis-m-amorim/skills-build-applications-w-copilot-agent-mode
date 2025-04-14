@@ -34,12 +34,13 @@ class WorkoutSerializer(ModelSerializer):
 @api_view(['GET'])
 def api_root(request, format=None):
     base_url = request.build_absolute_uri('/')
+    codespace_suffix = 'api/'  # Add the codespace Django REST API endpoint suffix
     return Response({
-        'users': f"{base_url}users/",
-        'teams': f"{base_url}teams/",
-        'activities': f"{base_url}activity/",
-        'leaderboard': f"{base_url}leaderboard/",
-        'workouts': f"{base_url}workouts/",
+        'users': f"{base_url}{codespace_suffix}users/",
+        'teams': f"{base_url}{codespace_suffix}teams/",
+        'activities': f"{base_url}{codespace_suffix}activity/",
+        'leaderboard': f"{base_url}{codespace_suffix}leaderboard/",
+        'workouts': f"{base_url}{codespace_suffix}workouts/",
     })
 
 class UserViewSet(ModelViewSet):
